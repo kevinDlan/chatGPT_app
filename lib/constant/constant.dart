@@ -1,1 +1,1 @@
-const chatGptApiKey = "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";
+const chatGptApiKey = "put you chatgpt api key here";

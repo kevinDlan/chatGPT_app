@@ -94,49 +94,49 @@ class _TextVoiceMessageFieldState extends ConsumerState<TextVoiceMessageField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Row(
         children: [
           Expanded(
-            child: SizedBox(
-              height: 50.0,
-              child: TextField(
-                onChanged: (value) {
-                  if (value.isNotEmpty) {
-                    setState(() {
-                      mode = InputMode.text;
-                    });
-                  } else {
-                    setState(() {
-                      mode = InputMode.voice;
-                    });
-                  }
-                },
-                controller: textMessageController,
-                cursorColor: Theme.of(context).colorScheme.onPrimary,
-                decoration: InputDecoration(
-                  hintText: 'Send Message',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+            child: TextField(
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+              minLines: 1,
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  setState(() {
+                    mode = InputMode.text;
+                  });
+                } else {
+                  setState(() {
+                    mode = InputMode.voice;
+                  });
+                }
+              },
+              controller: textMessageController,
+              cursorColor: Theme.of(context).colorScheme.onPrimary,
+              decoration: InputDecoration(
+                hintText: 'Send Message',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  suffixIcon: SendMessageButton(
-                    isReplying: _isReplying,
-                    inputMode: mode,
-                    isListening: _isListening,
-                    sendTextMessage: () {
-                      final String msg =
-                          textMessageController.text.trim().toString();
-                      textMessageController.clear();
-                      sendTextMessage(msg);
-                    },
-                    sendVoiceMessage: sendVoidMessage,
-                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                suffixIcon: SendMessageButton(
+                  isReplying: _isReplying,
+                  inputMode: mode,
+                  isListening: _isListening,
+                  sendTextMessage: () {
+                    final String msg =
+                        textMessageController.text.trim().toString();
+                    textMessageController.clear();
+                    sendTextMessage(msg);
+                  },
+                  sendVoiceMessage: sendVoidMessage,
                 ),
               ),
             ),
