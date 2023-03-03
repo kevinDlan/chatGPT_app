@@ -1,12 +1,14 @@
 import 'package:chatia/features/chat/widgets/chat_item.dart';
 import 'package:chatia/features/chat/widgets/custom_app_bar.dart';
 import 'package:chatia/features/chat/widgets/text_voice_message_field.dart';
+import 'package:chatia/features/settings/screens/set_lang.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../models/chat.dart';
 import '../../../providers/chat_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -29,6 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       scrollController.jumpTo(scrollController.position.maxScrollExtent);
     });
+    final localization = AppLocalizations.of(context);
     return Scaffold(
       appBar: const CustomeAppBar(),
       drawer: Drawer(
@@ -48,6 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   height: MediaQuery.of(context).size.height * 0.25,
                 ),
                 ListTile(
+                  horizontalTitleGap: 3.0,
                   onTap: () {
                     print("Logout");
                   },
@@ -55,31 +59,32 @@ class _ChatScreenState extends State<ChatScreen> {
                     Icons.person,
                     size: 30.0,
                   ),
-                  title: Align(
-                    alignment: Alignment(-1.3, 0),
-                    child: Text(
-                      'Profil',
-                      style: TextStyle(fontSize: 17.0),
-                    ),
+                  title: Text(
+                    localization!.profil,
+                    style: TextStyle(fontSize: 17.0),
                   ),
                 ),
                 ListTile(
+                  horizontalTitleGap: 3.0,
                   onTap: () {
-                    print("Logout");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SetLangScreen(),
+                      ),
+                    );
                   },
                   leading: Icon(
                     Icons.settings,
                     size: 30.0,
                   ),
-                  title: Align(
-                    alignment: Alignment(-1.3, 0),
-                    child: Text(
-                      'Settings',
-                      style: TextStyle(fontSize: 17.0),
-                    ),
+                  title: Text(
+                    localization.settings,
+                    style: TextStyle(fontSize: 17.0),
                   ),
                 ),
                 ListTile(
+                  horizontalTitleGap: 3.0,
                   onTap: () {
                     print("Logout");
                   },
@@ -87,17 +92,15 @@ class _ChatScreenState extends State<ChatScreen> {
                     Icons.history,
                     size: 30.0,
                   ),
-                  title: Align(
-                    alignment: Alignment(-1.3, 0),
-                    child: Text(
-                      'Chat History',
-                      style: TextStyle(fontSize: 17.0),
-                    ),
+                  title: Text(
+                    localization.chat_history,
+                    style: TextStyle(fontSize: 17.0),
                   ),
                 )
               ],
             ),
             ListTile(
+              horizontalTitleGap: 3.0,
               onTap: () {
                 print("Logout");
               },
@@ -105,12 +108,9 @@ class _ChatScreenState extends State<ChatScreen> {
                 Icons.logout,
                 size: 30.0,
               ),
-              title: Align(
-                alignment: Alignment(-1.5, 0),
-                child: Text(
-                  'Logout',
-                  style: TextStyle(fontSize: 17.0),
-                ),
+              title: Text(
+                localization.logout,
+                style: TextStyle(fontSize: 17.0),
               ),
             )
           ],
@@ -132,9 +132,10 @@ class _ChatScreenState extends State<ChatScreen> {
                         return ChatItem(message: chat.message, isMe: chat.isMe);
                       },
                     )
-                  : const Center(
+                  : Center(
                       child: Text(
-                        "Send Me Message To start Chat 😎",
+                        localization.home_message,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.bold),
                       ),

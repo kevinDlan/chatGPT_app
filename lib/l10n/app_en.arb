@@ -1,0 +1,10 @@
+{
+    "chat":"chat",
+    "home_message":"Send Me Message To Start Chat 😎",
+    "hint_text":"Send Message",
+    "profil":"Profil",
+    "settings":"Settings",
+    "chat_history":"Chat History",
+    "logout":"Logout",
+    "choose_lang":"Choose Your Language"
+}

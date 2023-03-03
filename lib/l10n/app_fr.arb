@@ -1,0 +1,10 @@
+{
+    "chat":"chat",
+    "home_message":"Envoyez-moi un message pour commencer la conversation 😎",
+    "hint_text":"Envoyer un Message",
+    "profil":"Profil",
+    "settings":"Paramètres",
+    "chat_history":"Historique du chat",
+    "logout":"Déconnexion",
+    "choose_lang":"Choisissez votre langue"
+}
