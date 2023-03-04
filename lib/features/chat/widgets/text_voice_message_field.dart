@@ -6,6 +6,7 @@ import 'package:chatia/services/ai_chat_handler.dart';
 import 'package:chatia/services/voice_record_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TextVoiceMessageField extends ConsumerStatefulWidget {
   const TextVoiceMessageField({super.key});
@@ -93,6 +94,7 @@ class _TextVoiceMessageFieldState extends ConsumerState<TextVoiceMessageField> {
 
   @override
   Widget build(BuildContext context) {
+    final localisation = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
       child: Row(
@@ -116,7 +118,7 @@ class _TextVoiceMessageFieldState extends ConsumerState<TextVoiceMessageField> {
               controller: textMessageController,
               cursorColor: Theme.of(context).colorScheme.onPrimary,
               decoration: InputDecoration(
-                hintText: 'Send Message',
+                hintText: localisation!.hint_text,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

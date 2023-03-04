@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SetLangScreen extends ConsumerStatefulWidget {
   const SetLangScreen({super.key});
@@ -12,6 +13,15 @@ class SetLangScreen extends ConsumerStatefulWidget {
 }
 
 class _SetLangScreenState extends ConsumerState<SetLangScreen> {
+  final uri = Uri.parse('https://www.facebook.com');
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(uri,
+        webOnlyWindowName: "Test",
+        mode: LaunchMode.externalNonBrowserApplication,
+        webViewConfiguration: const WebViewConfiguration()))
+      throw 'could not launch url';
+  }
+
   @override
   Widget build(BuildContext context) {
     final localisation = AppLocalizations.of(context);
@@ -41,8 +51,11 @@ class _SetLangScreenState extends ConsumerState<SetLangScreen> {
                   });
                 }),
           ),
-          Divider(
-            color: Colors.grey,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Divider(
+              color: Colors.grey,
+            ),
           ),
           ListTile(
             leading: Flag.fromCode(
@@ -63,6 +76,18 @@ class _SetLangScreenState extends ConsumerState<SetLangScreen> {
                     _groupValue = value;
                   });
                 }),
+          ),
+          TextButton(
+            onPressed: () async {
+              _launchUrl();
+            },
+            child: Text(
+              "Link",
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+                color: Colors.blue,
+              ),
+            ),
           )
         ],
       ),
